@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <script src="main.js" defer></script>
+  <title>Void</title>
+</head>
+<body>
+  <div class="topnav">
+    <a href="welcome.html">Welcome</a>
+    <a href="home.html">Home</a>
+    <a href="transport.html">Transportation</a>
+    <a href="fBanks.html">Food Banks</a>
+    <a href="settings.html">Settings</a>
+  </div>
+  <div class="content">
+    <h1>Be <span id="typewriter"></span></h1>
+
+    <div class="info1">
+      <h1>Welcome to my website</h1>
+    </div>
+
+  </div>
+  <script>
+var i = 0;
+var txt = ["creative", "you.", "kind", "helpful", "artistic", "well-mannered", "userERR NAME UNKNOWN 'They're watching...'", "ERR codename V0ID"];
+var speed = 45;
+var currentText = "";
+var previousText = "";
+
+function typeWriter() {
+  if (i < txt.length) {
+    currentText = txt[i];
+    document.getElementById('typewriter').innerHTML = ""; // Clear the previous text
+    var charIndex = 0;
+    var typeInterval = setInterval(() => {
+      document.getElementById('typewriter').innerHTML += currentText.charAt(charIndex);
+      charIndex++;
+      if (charIndex >= currentText.length) {
+        clearInterval(typeInterval);
+        previousText = currentText; // Update the previous text
+        setTimeout(deleteText, 2000); // Delete the text after 2 seconds
+        i++; // Move to the next text in the array
+      }
+    }, speed);
+  }
+}
+
+function deleteText() {
+  var deleteInterval = setInterval(() => {
+    var currentTextElement = document.getElementById('typewriter');
+    currentTextElement.innerHTML = currentTextElement.innerHTML.slice(0, -1);
+    if (currentTextElement.innerHTML === "") {
+      clearInterval(deleteInterval);
+      typeWriter(); // Start typing a new text
+    }
+  }, speed);
+}
+
+typeWriter(); // Start the typewriter effect
+  </script>
+</body>
+</html>
